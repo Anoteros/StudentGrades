@@ -3,9 +3,8 @@ require_relative './../app/student'
 
 describe 'student class' do
 
-  it 'should initialize student' do
-    s = Student.new('chris', '12')
-    s.name == 'chris'
-    s.grade == '12'
-  end
+    it "initializes school class" do
+      x = School.new
+      expect(x.class) == School
+    end
 end

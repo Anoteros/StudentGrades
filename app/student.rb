@@ -1,9 +1,25 @@
-class Student
-  attr_accessor :name, :grade
+class School
+  attr_accessor :student, :grade, :roster
 
-  def initialize(name, grade)
-    @name = name
-    @grade = grade
+  def initialize
+    @roster = { }
   end
+
+  def add(student, grade)
+    roster[grade] = []
+    roster[grade] << student
+  end
+
+  def all
+    roster.each do |key , value|
+      puts "#{value} is in grade #{key}"
+    end
+  end
+
+  def grade(grade)
+    puts roster[grade]
+  end
+
+
 end
 
