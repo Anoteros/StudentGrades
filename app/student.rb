@@ -34,8 +34,8 @@ class School
   end
 
   def sort
-    # sorted_roster = roster.sort_by {|k, v| k}
-    # puts sorted_roster
+    sorted_roster = roster.sort_by {|k, v| k}
+    puts sorted_roster
   end
 
 end
