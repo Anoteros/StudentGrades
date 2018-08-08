@@ -36,6 +36,7 @@ class School
         break
       end
     end
+    # If the class cannot be found then add it to the classes.
     if !class_exists
       a = Array.new
       roster.append({ grade: level, teacher: teacher, students: a})
@@ -49,27 +50,32 @@ class School
   def all
     roster.each do |k|
       if k[:students]
-       puts k[:students]
+       puts "Grade #{k[:grade]} : #{k[:students]}"
       end
     end
   end
 
   # Return all students in the given grade
   def grade(grade)
-    roster.each do |k, v|
-      if k == grade
-        return v
+    roster.each do |k|
+      if k[:grade] == grade
+        puts "The following students are in Grade #{grade}: #{k[:students]}"
       end
     end
   end
 
+  # Sort all students : first by grade level then by name.
   def sort
-    sorted_roster = roster.sort_by {|k, v| k}
-    puts sorted_roster
-  end
-
-  def students
-
+    sorted = roster.sort_by { |k| k[:grade]}
+    sorted.each do |x|
+      x[:students].sort_by! { |v| v }
+    end
+    puts sorted
   end
 end
 
+
+s = School.new
+s.add_grade_level("Mr. Rogers", 5)
+s.add("Tim", 5)
+s.sort
