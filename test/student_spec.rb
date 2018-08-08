@@ -37,6 +37,8 @@ describe 'student class' do
     end
 
     it "should sort grades numerically" do
-      @school.sort
+      sorted = @school.sort
+      expect sorted == '{:grade=>10, :teacher=>"Mr. Smith", :students=>["David", "Greg", "Jordan"]}
+      {:grade=>12, :teacher=>"Mr. Rogers", :students=>["Bob", "Chris"]}'
     end
 end
