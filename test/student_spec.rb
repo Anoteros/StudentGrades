@@ -6,9 +6,10 @@ require_relative './../app/student'
 describe 'student class' do
     before :each do
       @school = School.new
+      @school.add_grade_level("Mr. Rogers", 12)
       @school.add("Bob", 12)
       @school.add("Chris", 12)
-      @school.add("Steve", 10)
+      @school.add("Steve", 9)
     end
 
     it "initializes school class" do
@@ -16,20 +17,26 @@ describe 'student class' do
     end
 
     it "should add students to roster" do
-      expect(@school.all.length).to eq(3)
-
+      @school.add("Chuck", 12)
+      expect(@school.grade(12)).to include "Chuck"
     end
 
     it "should not add add students to non-existent grades" do
-      expect(@school.add("Tom", 20)).to eq("That grade does not exist!")
+      expect(@school.add("Tom", 99)).to eq("Error: Class does not exist!")
     end
 
     it "should add grade levels and teachers to roster" do
+      @school.add_grade_level("Mr. Rogan", 8)
+      @school.add("Eddie", 8)
+      expect(@school.grade(8)).to include("Eddie")
 
     end
 
     it "should list all students in given grade" do
-      expect(@school.grade(10)).to eq(["Steve"])
       expect(@school.grade(12)).to eq(["Bob", "Chris"])
+    end
+
+    it "should sort grades numerically" do
+      @school.sort
     end
 end

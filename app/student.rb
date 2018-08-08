@@ -1,5 +1,5 @@
 class School
-  attr_accessor :student, :grade, :roster
+  attr_accessor :students, :grade, :teacher, :roster
 
 
   def initialize
@@ -23,7 +23,8 @@ class School
             end
           end
       else
-        puts "That class does not exist. You must first add the class to the school."
+        return "Error: Class does not exist!"
+        puts "Error: Class does not exist!"
       end
   end
 
@@ -60,6 +61,7 @@ class School
     roster.each do |k|
       if k[:grade] == grade
         puts "The following students are in Grade #{grade}: #{k[:students]}"
+        return k[:students]
       end
     end
   end
@@ -73,9 +75,3 @@ class School
     puts sorted
   end
 end
-
-
-s = School.new
-s.add_grade_level("Mr. Rogers", 5)
-s.add("Tim", 5)
-s.sort
