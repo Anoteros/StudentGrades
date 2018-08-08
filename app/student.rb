@@ -1,26 +1,56 @@
 class School
   attr_accessor :student, :grade, :roster
 
+
   def initialize
-    @roster = { }
+    @roster = [
+        {
+            grade: 10,
+            teacher: "Mr. Smith",
+            students: ["Greg", "David", "Jordan"]
+        }
+    ]
+
   end
 
-  # Add student and grade level to student roster
-  def add(student, grade)
-    # If the grade doesn't exist then initialize it
-    if roster[grade] == nil
-      roster[grade] = []
-      roster[grade] << student
-      # Otherwise push student onto key's array of vals
+  def add(name, level)
+    # If grade exists, add the student. Otherwise throw an error.
+      if roster.any? {|h| h[:grade] === level}
+          roster.each do |k|
+            if k[:grade] == level
+              k[:students].append(name)
+              puts "Successfully added student to Grade #{level}"
+            end
+          end
+      else
+        puts "That class does not exist. You must first add the class to the school."
+      end
+  end
+
+  def add_grade_level(teacher, level)
+    class_exists = false
+    # Check if the grade already exists
+    roster.each do |k|
+      if k[:grade] == level
+        class_exists = true
+        break
+      end
+    end
+    if !class_exists
+      a = Array.new
+      roster.append({ grade: level, teacher: teacher, students: a})
+      puts "Class added to School successfully."
     else
-      roster[grade] << student
+      puts "That class already exists and is taught by #{teacher}"
     end
   end
 
   # For each entry in the roster, list it's grade and students
   def all
-    roster.each do |key , value|
-       puts "#{value} is in grade #{key}"
+    roster.each do |k|
+      if k[:students]
+       puts k[:students]
+      end
     end
   end
 
@@ -38,5 +68,8 @@ class School
     puts sorted_roster
   end
 
+  def students
+
+  end
 end
 
